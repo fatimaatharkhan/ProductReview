@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Layout, Menu, Button, Modal, Form, Input } from "antd";
+import { Layout, Menu, Button, Modal, Form, Input, Select } from "antd";
 import ProductDetails from "./Components/ProductDetails";
 import Home from "./Components/Home";
-
-
 
 const { Header, Content } = Layout;
 
@@ -39,38 +37,56 @@ function ProtectedRoute() {
   const [password, setPassword] = useState("");
   const [showSignupModal, setShowSignupModal] = useState(false);
 
-  const handleLogin = (values) => {
-    // Destructure values to extract username and password
-    const { username, password } = values;
+  const handleLogin = async (values) => {
+    try {
+      const { email, password } = values;
 
-    fetch("/api/getProducts").then(
-      res = res.json()
-    ).then(
-      data =>{
-        const user = data.find(
-          (u) => u.username === username && u.password === password
-        );
-        if (user) {
-          setLoggedIn(true);
-        }
+      // Send a POST request to the login API endpoint
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      // Check if the response is successful
+      if (response.ok) {
+        // Login successful, retrieve the user data from the response
+        const userData = await response.json();
+        setLoggedIn(true);
+        // You can store the user data in the state or context for further use
+      } else {
+        // Login failed, display error message
+        console.error("Error logging in:", response.statusText);
+        // You can display an error message to the user or handle it as needed
       }
-    )
-
-    // // Perform authentication here
-    // const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    
+    } catch (error) {
+      console.error("Error logging in:", error);
+      // You can display an error message to the user or handle it as needed
+    }
   };
 
-  const handleSignup = (values) => {
-    // Destructure values to extract username and password
-    const { username, password } = values;
+  const handleSignup = async (values) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
 
-    // Save user data to localStorage
-    const user = { username, password };
-    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const updatedUsers = [...storedUsers, user];
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-    setShowSignupModal(false);
+      if (response.ok) {
+        // User created successfully
+        setShowSignupModal(false);
+      } else {
+        // Error creating user
+        console.error("Error creating user 2:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error creating user 1:", error);
+    }
   };
 
   const handleLogout = () => {
@@ -84,7 +100,7 @@ function ProtectedRoute() {
       <div>
         <h2>Login</h2>
         <Form layout="vertical" onFinish={handleLogin}>
-          <Form.Item label="Username" name="username">
+          <Form.Item label="Email" name="email">
             <Input />
           </Form.Item>
           <Form.Item label="Password" name="password">
@@ -107,11 +123,40 @@ function ProtectedRoute() {
           footer={null}
         >
           <Form layout="vertical" onFinish={handleSignup}>
-            <Form.Item label="Username" name="username">
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
+            >
               <Input />
             </Form.Item>
-            <Form.Item label="Password" name="password">
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
+            >
               <Input.Password />
+            </Form.Item>
+            <Form.Item
+              label="Name"
+              name="name"
+              rules={[{ required: true, message: "Please input your name!" }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="User Type"
+              name="userType"
+              rules={[
+                { required: true, message: "Please select your user type!" },
+              ]}
+            >
+              <Select>
+                <Select.Option value="business">Business</Select.Option>
+                <Select.Option value="user">User</Select.Option>
+              </Select>
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit">
