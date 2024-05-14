@@ -22,21 +22,47 @@ mongoose.connect(
     }
 );
 
+// Counter Schema
+const counterSchema = new mongoose.Schema({
+  _id: { type: String, required: true },
+  sequence_value: { type: Number, default: 0 }
+});
+
+const Counter = mongoose.model('Counter', counterSchema);
+
 // USER SCHEMA
 const userSchema = new mongoose.Schema({
+  _id: { type: Number },
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-//   isVerified: { type: Boolean, default: false },
-//   socialAccounts: [{ type: String }],
   userType: { type: String, enum: ['business', 'user'], required: true },
-  profilePicture: { type: String }
-//   category: {type: String}
-//   createdAt: { type: Date, default: Date.now },
-//   updatedAt: { type: Date, default: Date.now }
+  profilePicture: { type: String },
+  category: { type: String },
+  aboutBusiness: { type: String }
+});
+
+userSchema.pre('save', async function (next) {
+  const doc = this;
+  if (!doc._id) {
+    try {
+      const counter = await Counter.findByIdAndUpdate(
+        { _id: 'userId' },
+        { $inc: { sequence_value: 1 } },
+        { new: true, upsert: true }
+      );
+      doc._id = counter.sequence_value;
+      next();
+    } catch (error) {
+      return next(error);
+    }
+  } else {
+    return next();
+  }
 });
 
 const User = mongoose.model('User', userSchema);
+
 
 // PRODUCT SCHEMA
 const productSchema = new mongoose.Schema({
@@ -45,12 +71,13 @@ const productSchema = new mongoose.Schema({
   description: { type: String },
   price: { type: Number },
   imageUrl: { type: String },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  rating: {type: Number }
 //   updatedAt: { type: Date, default: Date.now }
 });
 
-
 const Product = mongoose.model('Product', productSchema);
+
 
 // REVIEW SCHEMA
 const reviewSchema = new mongoose.Schema({
@@ -64,6 +91,7 @@ const reviewSchema = new mongoose.Schema({
 });
 
 const Review = mongoose.model('Review', reviewSchema);
+
 
 // COMMENT SCHEMA
 const commentSchema = new mongoose.Schema({
@@ -83,11 +111,12 @@ app.post('/api/users', urlencodedParser, async (req, res) => {
   try {
     console.log(req.body);
     const { email, password, name, userType } = req.body;
-    console.log("Hello");
+
     // Validate request data
     if (!name || !email || !password || !userType) {
       return res.status(400).json({ message: 'All fields are required' });
     }
+
     // Create a new user instance using the Mongoose model
     const user = new User({
       name,
@@ -166,6 +195,58 @@ app.post('/api/addProducts', async (req, res) => {
       res.status(500).json({ message: 'Server Error' });
     }
   });
+
+
+// Add this route to fetch user information by ID
+app.get('/api/users/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Find the user by ID in the database
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    console.log(user);
+    // Return the user data
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
+
+
+// UPDATE BUSINESS PROFILE
+app.put('/api/users/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const { name, profilePicture, aboutBusiness, category } = req.body;
+
+    // Find the user by ID in the database
+    let user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update user profile fields
+    if (name) user.name = name;
+    if (profilePicture) user.profilePicture = profilePicture;
+    if (aboutBusiness) user.aboutBusiness = aboutBusiness;
+    if (category) user.category = category;
+
+    // Save the updated user profile
+    await user.save();
+
+    // Return a success response
+    res.status(200).json({ message: 'User profile updated successfully', user });
+  } catch (error) {
+    console.error('Error updating user profile:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
 
 
 // app.get("/api/insert", (req, res) => {
