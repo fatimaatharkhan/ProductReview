@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const mongoose = require("mongoose");
 var bodyParser = require('body-parser');
+const session = require('express-session');
 
 app.use(cors());
 // Use body-parser middleware to parse JSON bodies
@@ -13,6 +14,12 @@ var jsonParser = bodyParser.json()
  
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+app.use(session({
+  secret: 'f5c81ed7b5e5d034f7aeb2e2ad2af60e4aa9bc683bea22007246c0cf07f4701a',
+  resave: false,
+  saveUninitialized: true
+}));
 
 mongoose.connect(
     "mongodb+srv://fatimaatharkhan:IulvIKMp7KeVH9T6@productreview.ipm7xjq.mongodb.net/ProductReview?retryWrites=true&w=majority", 
@@ -66,14 +73,14 @@ const User = mongoose.model('User', userSchema);
 
 // PRODUCT SCHEMA
 const productSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Add userId field
   name: { type: String, required: true },
   category: { type: String },
   description: { type: String },
   price: { type: Number },
   imageUrl: { type: String },
   createdAt: { type: Date, default: Date.now },
-  rating: {type: Number }
-//   updatedAt: { type: Date, default: Date.now }
+  rating: { type: Number, default: 0 } // Set default value of rating to 0
 });
 
 const Product = mongoose.model('Product', productSchema);
@@ -107,10 +114,9 @@ const Comment = mongoose.model('Comment', commentSchema);
 module.exports = { User, Product, Review, Comment };
 
 // SIGNUP
-app.post('/api/users', urlencodedParser, async (req, res) => {
+app.post('/api/users', async (req, res) => {
   try {
-    console.log(req.body);
-    const { email, password, name, userType } = req.body;
+    const { name, email, password, userType } = req.body;
 
     // Validate request data
     if (!name || !email || !password || !userType) {
@@ -127,6 +133,9 @@ app.post('/api/users', urlencodedParser, async (req, res) => {
 
     // Save the user to the database
     await user.save();
+
+    // Store user information in the session
+    req.session.user = user;
 
     // Return a success response
     res.status(201).json({ message: 'User created successfully', user });
@@ -165,54 +174,52 @@ app.post('/api/login', urlencodedParser, async (req, res) => {
 });
 
 
-// Define a route to handle the creation of a product
-app.post('/api/addProducts', async (req, res) => {
-    // The form sends data in JSON format with fields: name, category, price, description, etc.
-    const { name, category, price, description } = req.body;
-  
-    // To validate that all fields are filled or not
-  
-    if (!name || !category || !price || !description) {
-      return res.status(400).json({ message: 'All fields are required' });
-    }
-  
-    try {
-      // Create a new product instance using the Mongoose model
-      const product = new Product({
-        name,
-        category,
-        price,
-        description
-      });
-  
-      // Save the product to the database
-      await product.save();
-  
-      // Return a success response
-      res.status(201).json({ message: 'Product created successfully', product });
-    } catch (error) {
-      console.error('Error creating product:', error);
-      res.status(500).json({ message: 'Server Error' });
-    }
-  });
-
-
-// Add this route to fetch user information by ID
-app.get('/api/users/:userId', async (req, res) => {
+// CREATE PRODUCT POST
+app.post('/api/products', async (req, res) => {
   try {
-    const userId = req.params.userId;
+    const { userId, name, category, description, price, imageUrl } = req.body;
 
-    // Find the user by ID in the database
-    const user = await User.findById(userId);
+    // Validate request data
+    if (!userId || !name || !category || !description || !price) {
+      return res.status(400).json({ message: 'userId, name, category, description, and price are required fields' });
+    }
+
+    // Create a new product instance using the Mongoose model
+    const product = new Product({
+      userId,
+      name,
+      category,
+      description,
+      price,
+      imageUrl
+    });
+
+    // Save the product to the database
+    await product.save();
+
+    // Return a success response
+    res.status(201).json({ message: 'Product created successfully', product });
+  } catch (error) {
+    console.error('Error creating product:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
+
+
+// TO FETCH THE USER PROFILE OF THE PERSON LOGGED IN
+app.get('/api/users/profile', async (req, res) => {
+  try {
+    // Retrieve user information from the session
+    const user = req.session.user;
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(401).json({ message: 'User not authenticated' });
     }
-    console.log(user);
+
     // Return the user data
     res.status(200).json({ user });
   } catch (error) {
-    console.error('Error fetching user:', error);
+    console.error('Error fetching user profile:', error);
     res.status(500).json({ message: 'Server Error' });
   }
 });
