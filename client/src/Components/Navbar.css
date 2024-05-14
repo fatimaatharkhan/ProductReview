@@ -1,0 +1,70 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navbar{
+    border-bottom: 1px solid grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.navbar .firstRow{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   
+    width: 60%;
+    padding-top: 5px;
+}
+
+.navbar h3{
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+.navbar button{
+    outline: none;
+    background-color: transparent;
+    padding: 15px;
+    font-size: 16px;
+    min-width: 30px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #5386E4;
+    border: 1px solid grey;
+    color: white;
+}
+
+input{
+    height: 50px;
+    font-size: 16px;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 10px;
+    border: 1px solid grey;
+    flex-basis: 60%;
+}
+
+.navbar .secondRow{
+    display: flex;
+    list-style: none;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60%;
+    gap: 1.5%;
+    padding: 15px 0px;
+}
+
+.secondRow a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+.secondRow a.active{
+    border-radius: 5px;
+    background-color: #5386E4;
+    color: white;
+    padding: 8px;
+}
