@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 10px;
 }
 .navbar .firstRow{
     display: flex;
@@ -58,7 +59,7 @@ input{
 
 .secondRow a{
     text-decoration: none;
-    color: black;
+    color: white;
     font-size: 20px;
 }
 

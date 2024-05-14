@@ -20,7 +20,7 @@
 }
 
 .cards-container{
-    margin-top: 10px;
+    margin-top: 15px;
     width: 100%;
     height: 50vh;
     display: flex;
@@ -39,6 +39,7 @@
 .card .imgBox{
     width: 100%;
     height: 50%;
+    border-bottom: 1px solid grey;
 }
 
 .card .imgBox img{
@@ -81,4 +82,60 @@
 .card a{
     text-decoration: none;
     color: black;
+}
+
+.second-section{
+    margin-top: 25px;
+}
+
+.category-container{
+    height: 40vh;
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,1fr);
+    gap: 20px;
+}
+
+.boxes{
+    border: 1px solid grey;
+    display: flex;
+    padding: 10px;
+}
+
+.boxes .svgBox{
+    width: 40%;
+    height: 100%;
+}
+
+.boxes .svgBox img{
+    width: 100%;
+    height: 100%;
+}
+
+.boxes .textBox{
+    width: 60%;
+    height: 100%;
+    padding: 20px 20px;
+}
+
+.boxes .textBox h3{
+    font-size: 25px;
+    color: #5386E4;
+}
+
+.boxes .textBox p{
+    font-size: 20px;
+    font-weight: 200;
+    padding: 10px 0px;
+}
+
+.category-container a{
+    text-decoration: none;
+}
+
+
+.thory-bary-card{
+    min-width: 31%;
+    flex-basis: 31%;
 }

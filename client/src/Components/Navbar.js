@@ -20,6 +20,7 @@ function Navbar() {
                 <NavLink to="/3D">3D</NavLink>
                 <NavLink to="/audio">Audio</NavLink>
                 <NavLink to="/money">Money</NavLink>
+                <NavLink to="/gaming">Gaming</NavLink>
             </div>
         </div>
     );

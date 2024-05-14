@@ -1,10 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import './Audio.css'
+import './Gaming.css'
 import Navbar from './Navbar';
 import Records from './posts.json'
-
-function Audio(props) {
+function Gaming() {
     let i = 0
     const chotiList = Records &&
         Records.map(post => {
@@ -65,7 +64,7 @@ function Audio(props) {
             <div className="home">
                 <div className="wrapper-middle">
                     <div className="first-section">
-                        <h2>Staff Picks Audio</h2>
+                        <h2>Staff Picks Gaming</h2>
                         <div className="cards-container">
                             {postList}
                         </div>
@@ -83,4 +82,4 @@ function Audio(props) {
 
 }
 
-export default Audio;
+export default Gaming;

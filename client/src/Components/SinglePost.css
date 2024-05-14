@@ -2,4 +2,94 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #0D1317;
+    color: white;
+}
+.SinglePost{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper-middle{
+    width: 60%;
+    margin-top: 25px;
+}
+
+.big-card{
+    width: 100%;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+.img-box{
+    width: 100%;
+    height: 70vh;
+}
+
+.img-box img{
+    width: 100%;
+    height: 100%;
+}
+
+.title-box{
+    width: 100%;
+    height: 10vh;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+    padding: 15px;
+}
+
+.title-box h2{
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.other-box{
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    border-bottom: 1px solid grey;
+
+}
+
+.price-box{
+    flex-basis: 25%;
+    height: 100%;
+    border-right: 1px solid grey;
+    padding: 15px;
+
+}
+
+.user-name-box{
+    flex-basis: 50%;
+    height: 100%;
+    border-right: 1px solid grey;
+    padding: 15px;
+
+}
+
+.rating-box{
+    flex-basis: 25%;
+    height: 100%;
+    padding: 15px;
+
+}
+
+.price-box h4,
+.user-name-box h4,
+.rating-box h4{
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.desc-box{
+    width: 100%;
+    height: 30vh;
+    padding: 15px;
+
+}
+
+.desc-box p{
+    font-size: 20px;
 }

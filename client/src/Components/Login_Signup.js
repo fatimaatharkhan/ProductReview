@@ -12,7 +12,7 @@ function Login_Signup() {
         const { email, password } = values;
   
         // Send a POST request to the login API endpoint
-        const response = await fetch("http://localhost:5000/api/login", {
+        const response = await fetch("http://localhost:5000/api/users/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -37,7 +37,7 @@ function Login_Signup() {
   
     const handleSignup = async (values) => {
       try {
-        const response = await fetch("http://localhost:5000/api/users", {
+        const response = await fetch("http://localhost:5000/api/users/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
