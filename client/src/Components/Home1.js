@@ -11,30 +11,32 @@ import Gaming from './SVGS/Gaming.svg'
 
 
 function Home1({ handleLogout }) {
-    const postList = Records &&
-        Records.map(post => {
-            return (
-                <div className="card" key={post.id}>
-                    <Link to={'/' + post.id} >
-                        <div className="imgBox">
-                            <img src={post.image_path} alt="nothing" />
-                        </div>
-                        <div className="title">
-                            <h3>{post.title}</h3>
-                        </div>
-                        <div className="user-name">
-                            <h3>{post.posted_by}</h3>
-                        </div>
-                        <div className="rating">
-                            <h3>{post.ratings}</h3>
-                        </div>
-                        <div className="price">
-                            <h3>{post.price}</h3>
-                        </div>
-                    </Link>
-                </div>
-            )
-        })
+    const sortedRecords = Records.sort((a, b) => b.ratings - a.ratings);
+
+    const postList = sortedRecords && sortedRecords.map(post => {
+        return (
+            <div className="card" key={post.id}>
+                <Link to={'/' + post.id} >
+                    <div className="imgBox">
+                        <img src={post.image_path} alt="nothing" />
+                    </div>
+                    <div className="title">
+                        <h3>{post.title}</h3>
+                    </div>
+                    <div className="user-name">
+                        <h3>{post.posted_by}</h3>
+                    </div>
+                    <div className="rating">
+                        <h3>{post.ratings}</h3>
+                    </div>
+                    <div className="price">
+                        <h3>{post.price}</h3>
+                    </div>
+                </Link>
+            </div>
+        )
+    });
+
     return (
         <div>
             <Navbar />

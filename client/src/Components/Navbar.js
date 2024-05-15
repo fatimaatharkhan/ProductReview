@@ -12,7 +12,9 @@ function Navbar() {
                 <NavLink to='/login_signup'>
                     <button>Login</button>
                 </NavLink>
-                <button>Start Selling</button>
+                <NavLink to='/buisness_profile'>
+                    <button>Buisness Profile</button>
+                </NavLink>
             </div>
             
             <div className="secondRow">

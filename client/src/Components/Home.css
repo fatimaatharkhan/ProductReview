@@ -1,25 +1,27 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-.home{
+
+.home {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
-.wrapper-middle{
+.wrapper-middle {
     width: 60%;
     margin-top: 25px;
 }
 
-.first-section h2{
+.first-section h2 {
     font-weight: normal;
     width: 100%;
 }
 
-.cards-container{
+.cards-container {
     margin-top: 15px;
     width: 100%;
     height: 50vh;
@@ -28,7 +30,7 @@
     flex-wrap: wrap;
 }
 
-.card{
+.card {
     min-width: 19%;
     flex-basis: 19%;
     border: 1px solid grey;
@@ -36,34 +38,34 @@
     height: 100%;
 }
 
-.card .imgBox{
+.card .imgBox {
     width: 100%;
     height: 50%;
     border-bottom: 1px solid grey;
 }
 
-.card .imgBox img{
+.card .imgBox img {
     width: 100%;
     height: 100%;
 }
 
-.card .title{
+.card .title {
     width: 100%;
     height: 15%;
     overflow: hidden;
 }
 
-.card .user-name{
+.card .user-name {
     width: 100%;
     height: 10%;
 }
 
-.card .rating{
+.card .rating {
     width: 100%;
     height: 10%;
 }
 
-.card .price{
+.card .price {
     width: 100%;
     height: 15%;
     border-top: 1px solid grey;
@@ -72,70 +74,86 @@
 .card .title h3,
 .card .user-name h3,
 .card .price h3,
-.card .rating h3
-{
+.card .rating h3 {
     font-weight: normal;
     font-size: 20px;
     padding: 10px 0px 5px 10px;
 }
 
-.card a{
+.card a {
     text-decoration: none;
     color: black;
 }
 
-.second-section{
+.second-section {
     margin-top: 25px;
 }
 
-.category-container{
+.category-container {
     height: 40vh;
     margin-top: 15px;
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-template-rows: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 20px;
 }
 
-.boxes{
+.boxes {
     border: 1px solid grey;
     display: flex;
     padding: 10px;
 }
 
-.boxes .svgBox{
+.boxes .svgBox {
     width: 40%;
     height: 100%;
 }
 
-.boxes .svgBox img{
+.boxes .svgBox img {
     width: 100%;
     height: 100%;
 }
 
-.boxes .textBox{
+.boxes .textBox {
     width: 60%;
     height: 100%;
     padding: 20px 20px;
 }
 
-.boxes .textBox h3{
+.boxes .textBox h3 {
     font-size: 25px;
     color: #5386E4;
 }
 
-.boxes .textBox p{
+.boxes .textBox p {
     font-size: 20px;
     font-weight: 200;
     padding: 10px 0px;
 }
 
-.category-container a{
+.category-container a {
     text-decoration: none;
 }
 
 
-.thory-bary-card{
+.thory-bary-card {
     min-width: 31%;
     flex-basis: 31%;
+    border: 2px solid white;
+}
+
+@media screen and (max-width: 1150px) {
+    .home {
+        width: 100%;
+        /* border: 2px solid green;
+        justify-content: space-between;
+        align-items: start; */
+        display: block;
+    }
+    .wrapper-middle {
+        flex-basis: 100%;
+        min-width: 100%;
+        /* border: 2px solid red; */
+    }
+
 }

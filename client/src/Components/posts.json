@@ -4,7 +4,7 @@
         "image_path": "Images/img_1.jpg",
         "title" : "First Post",
         "posted_by":"First User",
-        "ratings":"5-star",
+        "ratings":"7",
         "price":"$99.0",
         "description": "What is Lorem Ipsum?Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap"
     },
@@ -13,7 +13,7 @@
         "image_path": "Images/img_2.jpg",
         "title" : "Second Post",
         "posted_by":"Second User",
-        "ratings":"4-star",
+        "ratings":"4",
         "price":"$89.0",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
     },
@@ -22,7 +22,7 @@
         "image_path": "Images/img_3.jpg",
         "title" : "Third Post",
         "posted_by":"First User",
-        "ratings":"5-star",
+        "ratings":"5",
         "price":"$79.0",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
     },
@@ -31,7 +31,7 @@
         "image_path": "Images/img_4.jpg",
         "title" : "Fourth Post",
         "posted_by":"First User",
-        "ratings":"3-star",
+        "ratings":"1",
         "price":"$69.0",
         "description": "Why do we use it? It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
     },
@@ -40,7 +40,7 @@
         "image_path": "Images/img_5.jpg",
         "title" : "Fifth Post",
         "posted_by":"Third User",
-        "ratings":"1-star",
+        "ratings":"9",
         "price":"$59.0",
         "description": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
     }

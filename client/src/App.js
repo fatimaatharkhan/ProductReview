@@ -9,7 +9,7 @@ import Money from './Components/Money'
 import ThreeD from './Components/ThreeD'
 import SinglePost from './Components/SinglePost'
 import Gaming from './Components/Gaming'
-
+import BusinessProfile from "./Components/BusinessProfile";
 
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
         <Route path="/money" element={<Money />} />
         <Route path="/gaming" element={<Gaming />} />
         <Route path="/login_signup" element={<Login_Signup />} />
+        <Route path="/buisness_profile" element={<BusinessProfile />} />
         <Route path="/product-details" element={<ProductDetails />} />
         <Route path="/" element={<SinglePost />}>
           <Route path=':post_id' element={<SinglePost />}></Route>

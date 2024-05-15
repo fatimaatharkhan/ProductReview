@@ -44,7 +44,7 @@ input{
     outline: none;
     padding-left: 10px;
     border: 1px solid grey;
-    flex-basis: 60%;
+    flex-basis: 50%;
 }
 
 .navbar .secondRow{
@@ -68,4 +68,12 @@ input{
     background-color: #5386E4;
     color: white;
     padding: 8px;
+}
+
+@media screen and (max-width: 1150px) {
+    .navbar .firstRow,
+    .navbar .secondRow
+    {  
+        width: 100%;
+    }
 }
